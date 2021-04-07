@@ -1,0 +1,76 @@
+<%- include('partials/header'); -%>
+
+    <div class="container" id="body">
+
+        <form action="/payment" method="POST">
+            <img src="imgs/shop.jpg" width="100%" class="img-fluid" alt="Shop Banner" />
+
+            <div class="row justify-center">
+
+                <div class="card product" style="width: 18rem;">
+                    <img src="imgs/shop-banner.jpg" class="card-img-top" alt="Product Banner">
+                    <div class="card-body">
+
+                        <% let name=product.product_name %>
+                            <% name=name.toUpperCase() %>
+
+                                <h3><span class="badge badge-">
+                                        <%= name%>
+                                    </span></h3>
+
+                                <p class="card-text">
+                                    <%= product.product_des %>
+                                </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text "> ₦ </span>
+                                <span class="input-group-number price-btn">
+                                    <%= product.price %>
+                                </span>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="input-group mb-4">
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="number" name="quantity"
+                                        placeholder="Enter Quantity" autocomplete="OFF" required>
+                                    <span class="input-group-text"> piesces </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <b> Total: ₦</b>
+                        </li>
+
+                    </ul>
+                    <div class="card-body">
+
+                        <input type="hidden" name="productId" value="<%= product._id %>">
+                        <input type="hidden" name="name" value="<%= name %>">
+
+
+                        <div class="d-grid gap-1">
+                            <button type="submit" value="<%= product._id %>" class="btn btn-success" name="buy"
+                                type="button">Pay
+                            </button>
+                        </div>
+
+
+                    </div>
+        </form>
+    </div>
+
+
+
+    </div>
+
+    </div>
+
+
+
+    <%- include('partials/footer'); -%>

@@ -1,0 +1,23 @@
+<%- include('partials/header'); -%>
+
+    <div class="container" id="alert">
+
+        <div class="jumbotron" id="body">
+
+            <h3>Thank you for buying <span class="badge badge-success">
+                    <%= name%>
+                </span></h3>
+            <p> Your transaction ID is: <%= id %>
+            </p>
+            <form action="/searchAll" method="POST">
+                <div class="form-group buy-btn">
+                    <button type="click" name="show" value="yes" class="btn btn-warning"> Back to SHOP
+                    </button>
+                </div>
+            </form>
+        </div>
+        <a href="/" type="buttun" class="btn btn-success"> Home </a>
+
+    </div>
+
+    <%- include('partials/footer'); -%>

@@ -1,0 +1,69 @@
+<%- include('partials/header'); -%>
+
+    <div class="container" id="body">
+        <img src="imgs/shop.jpg" width="100%" class="img-fluid" alt="Shop Banner" />
+
+        <div class="row justify-center">
+
+
+            <div class="card product" style="width: 18rem;">
+                <img src="imgs/shop-banner.jpg" class="card-img-top" alt="Product Banner">
+                <div class="card-body">
+
+                    <% let name=product.product_name %>
+                        <% name=name.toUpperCase() %>
+
+                            <h3><span class="badge badge-">
+                                    <%= name%>
+                                </span></h3>
+
+                            <p class="card-text">
+                                <%= product.product_des %>
+                            </p>
+                </div>
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text "> ₦ </span>
+                            <span class="input-group-number price-btn">
+                                <%= product.price %>
+                            </span>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="input-group mb-4">
+
+                            <button type="button" class="btn btn-info">
+                                Quantity: <span class="badge badge-light">
+                                    <%= product.quantity %>
+                                </span>
+                            </button>
+
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="input-group mb-3">
+                            <span>
+                                <%= product.imported %>
+                            </span>
+                        </div>
+                    </li>
+
+                </ul>
+                <div class="card-body">
+                    <div class="d-grid gap-1">
+                        <button class="btn btn-success" type="button">Pay</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <%- include('partials/footer'); -%>
