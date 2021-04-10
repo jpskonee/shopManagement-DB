@@ -78,13 +78,14 @@ app.post("/search", (req, res) => {
 
 
 //read route (searchAll)
-app.post("/searchAll", (req, res) => {
+app.get("/searchAll", (req, res) => {
 
     Cart.find((err, results) => {
         if (err) {
             console.log(err)
         } else {
-            res.render("cart", { products: results });
+            res.send(results)
+            //res.render("cart", { products: results });
         }
     });
 });
@@ -139,6 +140,6 @@ app.post("/payment", (req, res) => {
 
 
 //listening for server
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || port, () => {
     console.log(`Server is up and running on port ${port}`)
 });
