@@ -84,8 +84,8 @@ app.get("/searchAll", (req, res) => {
         if (err) {
             console.log(err)
         } else {
-            res.send(results)
-            //res.render("cart", { products: results });
+            res.render("cart", { products: results });
+            //res.send(results)
         }
     });
 });
