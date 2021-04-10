@@ -38,7 +38,13 @@
 
                                 <button type="button" class="btn btn-info">
                                     Quantity: <span class="badge badge-light">
-                                        <%= product.quantity %>
+
+                                        <% if (product.quantity < 1) { %>
+                                            <p style="text-decoration: line-through;"> Sold Out</p>
+                                            <% } else { %>
+                                                <%= product.quantity %>
+                                                    <% } %>
+
                                     </span>
                                 </button>
 
@@ -54,17 +60,38 @@
                         </li>
 
                     </ul>
+
+
+
                     <div class="card-body">
-                        <form action="/buy" method="POST">
-                            <div class="d-grid gap-1">
-                                <input type="hidden" name="productId" value="<%= product._id %>">
-                                <button type="submit" value="yes" class="btn btn-success" name="buy" type="button">BUY
-                                </button>
-                                <button type="submit" value="yes" class="btn btn-warning" name="browse"
-                                    type="button">BROWSE
-                                </button>
-                            </div>
-                        </form>
+                        <% if (product.quantity < 1) { %>
+                            <form action="/buy" method="POST">
+                                <div class="d-grid gap-1">
+                                    <input type="hidden" name="productId" value="<%= product._id %>">
+                                    <button type="submit" disabled value="yes" class="btn btn-success" name="buy"
+                                        type="button">BUY
+                                    </button>
+                                    <button type="submit" disabled value="yes" class="btn btn-warning" name="browse"
+                                        type="button">BROWSE
+                                    </button>
+                                </div>
+                            </form>
+
+                            <% } else { %>
+                                <form action="/buy" method="POST">
+                                    <div class="d-grid gap-1">
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                        <button type="submit" value="yes" class="btn btn-success" name="buy"
+                                            type="button">BUY
+                                        </button>
+                                        <button type="submit" value="yes" class="btn btn-warning" name="browse"
+                                            type="button">BROWSE
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <% } %>
+
 
                     </div>
                 </div>
