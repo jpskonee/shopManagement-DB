@@ -121,12 +121,12 @@
                         <div class="form-group">
                             <label for="name">Name: </label>
                             <input type="text" name="name" class="form-control" placeholder="Enter Product name"
-                                autofocus autocomplete="OFF">
+                                autofocus autocomplete="OFF" minlength="4">
                         </div>
 
                         <label for="imported"> Locality </label>
                         <select class="form-control" name="imported">
-                            <option value="none"> </option>
+                            <option value="none" selected> </option>
                             <option value="Local"> Local </option>
                             <option value="Foreign">Foreign</option>
                         </select>
@@ -134,9 +134,8 @@
                         <div class="form-group">
                             <label for="range">Price Range </label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"> 0</span>
-                                <input type="number" placeholder="Set a price" class="form-control" name="range"
-                                    step="100">
+                                <span class="input-group-text"><b> ₦ 0 </b> </span>
+                                <input type="number" placeholder="Set a price" class="form-control" name="range">
                             </div>
                         </div>
 

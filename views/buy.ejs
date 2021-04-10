@@ -38,7 +38,7 @@
                                 <div class="input-group mb-3">
                                     <input class="form-control" type="number" name="quantity"
                                         placeholder="Enter Quantity" autocomplete="OFF" required>
-                                    <span class="input-group-text"> piesces </span>
+                                    <span class="input-group-text"> items </span>
                                 </div>
                             </div>
                         </li>
@@ -56,19 +56,24 @@
 
                         <div class="d-grid gap-1">
                             <button type="submit" value="<%= product._id %>" class="btn btn-success" name="buy"
-                                type="button">Pay
+                                type="button"> Pay Now!
                             </button>
                         </div>
 
 
                     </div>
+
+                </div>
+
+
+
+            </div>
         </form>
-    </div>
 
-
-
-    </div>
-
+        <form action="/" method="get">
+            <button type="submit" class="btn btn-dark"> Home </button>
+        </form>
+        <br> <br>
     </div>
 
 

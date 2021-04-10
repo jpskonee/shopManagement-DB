@@ -11,7 +11,13 @@ app.use(express.json());
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
-mongoose.connect("mongodb+srv://jpskonee:jpskonee@cluster0.rfukp.mongodb.net/CartDB", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://jpskonee:jpskonee@cluster0.rfukp.mongodb.net/CartDB",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+
+    });
 
 const CartSchema = {
     "product_name": String,
@@ -59,21 +65,43 @@ app.post("/insert", (req, res) => {
 
 //read route (search)
 app.post("/search", (req, res) => {
+    let name = req.body.name.toLowerCase();
 
-    let nameToLowerCase = req.body.name;
-    let name = nameToLowerCase.toLowerCase();
+
+    if (name.length === 0) {
+        name = null
+    }
+
     const range = req.body.range;
     const imported = req.body.imported;
 
-    Cart.find({ $or: [{ product_name: name }, { price: { $lte: range } }, { imported: imported }] }, (err, results) => {
-        if (err) {
-            console.log(err)
-        } else if (!results) {
-            res.render("alert", { name: name })
-        } else {
-            res.render("cart", { products: results });
-        }
+    Cart.find((err, results) => {
+        let screenedResults = [];
+        results.forEach(element => {
+            if (element.product_name.includes(name)) {
+                screenedResults.push(element)
+            }
+        });
+
+        Cart.find({ $or: [{ price: { $lte: range } }, { imported: imported }] }, (err, secondResults) => {
+
+            if (err) {
+                console.log(err)
+            } else if (screenedResults.length >= 1) {
+                res.render("cart", { products: screenedResults });
+            } else if (secondResults.length === 0) {
+                if (name === null) {
+                    res.render("noentry")
+                } else {
+                    res.render("bad", { name: name })
+                }
+
+            } else if (secondResults) {
+                res.render("cart", { products: secondResults });
+            }
+        });
     });
+
 });
 
 
