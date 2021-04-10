@@ -2,6 +2,7 @@ const express = require("express");
 const ejs = require("ejs");
 const port = 3000;
 
+
 const mongoose = require("mongoose");
 
 const app = express();
@@ -28,8 +29,31 @@ const CartSchema = {
 }
 
 const Cart = new mongoose.model("cart", CartSchema);
-//home route
 
+
+
+//my api route
+app.route("/myapi").get((req, res) => {
+    res.render("my-api/my-api")
+}).post((req, res) => {
+    let username = req.body.username.toLowerCase();
+    let pwd = req.body.pwd.toLowerCase();
+
+    if (username === "jpskonee" && pwd === "jpskonee") {
+        Cart.find((err, api) => {
+            if (err) {
+                throw err;
+            } else if (api) {
+                res.send(api)
+            }
+        })
+    } else {
+        res.render("my-api/wrongkey");
+    }
+
+});
+
+//home route
 app.get("/", (req, res) => {
     let todayDate = new Date().toLocaleDateString()
     res.render("index", { date: todayDate })
